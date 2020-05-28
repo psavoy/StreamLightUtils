@@ -17,8 +17,13 @@
   #doi:10.1029/2011JG001708.
 #===============================================================================
 extract_height <- function(Site_ID, Lat, Lon){
-  #Import the Simard et al. (2011) dataset if it is not already loaded
-    if(!exists("simard2011")){data("simard2011", package = "StreamLightUtils")}
+  library("raster")
+  
+  #Import the Simard et al. (2011) dataset 
+    simard2011 <- raster::raster(paste0(.libPaths(), "/StreamLightUtils/data/simard2011.tif"))
+  
+  # #Import the Simard et al. (2011) dataset if it is not already loaded
+  #   if(!exists("simard2011")){data("simard2011", package = "StreamLightUtils")}
 
   #Defining the min and max values (by default these are not associated with the raster)
     map_ranges <- raster::setMinMax(simard2011)
