@@ -4,12 +4,16 @@
 \alias{get_tz}
 \title{Determines timezone from Latitude and Longitude}
 \usage{
-get_tz(Lat, Lon)
+get_tz(Lat, Lon, site_crs)
 }
 \arguments{
 \item{Lat}{The site Latitude}
 
 \item{Lon}{The site Longitude}
+
+\item{site_crs}{The coordinate reference system of the points, preferably designated
+as an EPSG code. For example, the most common geographic system is WGS84 and its EPSG 
+code is 4326.}
 }
 \value{
 Returns the IANA/Olson time zone identifier for a given Latitude and Longitude

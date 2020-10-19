@@ -5,6 +5,9 @@
 #' @param read_dir The read directory for downloaded files. For example, "C:/
 #' @param Lat The site Latitude
 #' @param Lon The site Longitude
+#' @param site_crs The coordinate reference system of the points, preferably designated
+#' as an EPSG code. For example, the most common geographic system is WGS84 and its EPSG 
+#' code is 4326. 
 #' @param estimate Binary ("yes", "no"). If yes, PPFD (umol m-2 s-1) is estimated
 #' from the lux (lumens m-2) data
 #'
@@ -15,7 +18,7 @@
 #Standardized HOBO light validation
 #Created 7/5/2018
 #===============================================================================
-HOBO_standardized <- function(read_dir, filename, Lat, Lon, estimate){
+HOBO_standardized <- function(read_dir, filename, Lat, Lon, site_crs, estimate){
   #Read in the file ignoring the additional columns for attached couplers etc...
     myfile <- read.csv(paste(read_dir, "/", filename, sep = ""), skip = 2, header = FALSE,
       stringsAsFactors = FALSE, na.strings = "")
@@ -36,7 +39,7 @@ HOBO_standardized <- function(read_dir, filename, Lat, Lon, estimate){
         format = "%m/%d/%y %I:%M:%S %p", tz = "UTC")
 
     #Getting the name of the local timezone
-      tz_name <- get_tz(Lat, Lon)
+      tz_name <- get_tz(Lat = Lat, Lon = Lon, site_crs = site_crs)
 
     #Adding a POSIX time column in local time
       VOI$local_time <- as.POSIXct(format(VOI[, "UTC_time"], format =

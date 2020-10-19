@@ -4,12 +4,18 @@
 \alias{NLDAS_proc}
 \title{Processes downloaded NLDAS light data}
 \usage{
-NLDAS_proc(read_dir, Site_IDs)
+NLDAS_proc(read_dir, Site_IDs, write_output = FALSE, save_dir = NULL)
 }
 \arguments{
 \item{read_dir}{The read directory for downloaded files. For example, "C:/myfolder}
 
 \item{Site_IDs}{Site name(s), for example "NC_UEno"}
+
+\item{write_output}{Binary indicating whether to write each individual driver
+file to disk. Default value is FALSE.}
+
+\item{save_dir}{Optional parameter when write_output = TRUE. The save directory 
+for files to be placed in. For example, "C:/}
 }
 \value{
 Returns a time series of incoming light data

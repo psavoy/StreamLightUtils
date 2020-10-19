@@ -4,8 +4,16 @@
 \alias{FitDoubleLogBeck}
 \title{A standalone version of the FitDoubleLogBeck function from the greenbrown package.}
 \usage{
-FitDoubleLogBeck(x, t = 1:length(x), tout = t, weighting = TRUE,
-  hessian = FALSE, plot = FALSE, ninit = 30, ...)
+FitDoubleLogBeck(
+  x,
+  t = 1:length(x),
+  tout = t,
+  weighting = TRUE,
+  hessian = FALSE,
+  plot = FALSE,
+  ninit = 30,
+  ...
+)
 }
 \description{
 This is a standalone version of the FitDoubleLogBeck function from

@@ -4,12 +4,16 @@
 \alias{extract_height}
 \title{Get LiDAR derived tree heights based on Latitude and Longitude}
 \usage{
-extract_height(Site_ID, Lat, Lon)
+extract_height(Site_ID, Lat, Lon, site_crs)
 }
 \arguments{
 \item{Lat}{The site Latitude}
 
 \item{Lon}{The site Longitude}
+
+\item{site_crs}{The coordinate reference system of the points, preferably designated
+as an EPSG code. For example, the most common geographic system is WGS84 and its EPSG 
+code is 4326.}
 
 \item{Site}{The site ID}
 }

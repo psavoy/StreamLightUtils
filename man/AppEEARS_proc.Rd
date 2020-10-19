@@ -4,19 +4,30 @@
 \alias{AppEEARS_proc}
 \title{Filters and gap-fills downloaded MODIS AppEEARS data}
 \usage{
-AppEEARS_proc(Site, proc_type)
+AppEEARS_proc(Site, fit_method, plot = FALSE)
 }
 \arguments{
 \item{Site}{The site name}
 
-\item{proc_type}{either "spline" (for a spline) or "dbl_log" (for a double logistic function)}
+\item{fit_method}{There are several options available from the phenofit package including
+AG", "Beck", "Elmore", "Gu", "Klos", "Zhang". Additionally, "spline" is available #'}
+
+\item{Plot}{Binary, where plot = TRUE generates a plot and plot = FALSE does not}
 }
 \description{
 This function filters and gap-fills downloaded MODIS LAI data from
-the lpdaac AppEEARS download portal. Processing steps include:
+the lpdaac AppEEARS download portal. There are several choices for processing
+this data:
 
 \itemize{
-  \item Savitsky-Golay filtering
-  \item Interpolation using either a spline or double logistic function
+  \item The LAI data is processed using the phenofit R package 
+  https://github.com/kongdd/phenofit. A rough fit is done using a weighted
+  Whittaker smoother and then curve fitting is done using an assymetric
+  Gaussian function. 
+  \item The LAI data is processed by using a Savitsky-Golay filter to remove
+  noise and then missing data is interpolated with a spline.
+  \item The LAI data is processed by using a Savitsky-Golay filter to remove
+  noise and then missing data is interpolated by fitting a double logistic curve
+  using the greenbrown R package.
 }
 }

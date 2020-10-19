@@ -4,7 +4,11 @@
 #'
 #' @param read_dir The read directory for downloaded files. For example, "C:/myfolder
 #' @param Site_IDs Site name(s), for example "NC_UEno"
-#'
+#' @param write_output Binary indicating whether to write each individual driver
+#' file to disk. Default value is FALSE.
+#' @param save_dir Optional parameter when write_output = TRUE. The save directory 
+#' for files to be placed in. For example, "C:/
+#' 
 #' @return Returns a time series of incoming light data
 #' @export
 
@@ -13,7 +17,7 @@
 #Created 11/27/2017
 #Last updated 11/13/2018
 #===============================================================================
-NLDAS_proc <- function(read_dir, Site_IDs){
+NLDAS_proc <- function(read_dir, Site_IDs, write_output = FALSE, save_dir = NULL){
   #Get a list of all downloaded NLDAS data
     setwd(read_dir)
     downloaded <- list.files(read_dir)[grep("*_NLDAS.asc", list.files(read_dir))]
@@ -22,7 +26,7 @@ NLDAS_proc <- function(read_dir, Site_IDs){
     downloaded_names <- stringr::str_sub(downloaded, 1, -11)
 
   #Function for processing each site
-    NLDAS_site <- function(file_name){
+    NLDAS_site <- function(file_name, write_output, save_dir){
       #Reading in the table, skipping the first 40 lines of header information
       #and removing the last row which contains a calculated mean value
         nldas <- read.table(file_name, skip = 40, nrows = length(readLines(file_name,
@@ -42,19 +46,30 @@ NLDAS_proc <- function(read_dir, Site_IDs){
         #Adding in Year, DOY, and hour information
           nldas[, "Year"] <- as.numeric(format(nldas[, "pos_time"], format = "%Y", tz = "UTC"))
           nldas[, "DOY"] <- as.numeric(format(nldas[, "pos_time"], format = "%j", tz = "UTC"))
-            nldas[, "Hour"] <- as.numeric(format(nldas[, "pos_time"], format = "%H", tz = "UTC"))
+          nldas[, "Hour"] <- as.numeric(format(nldas[, "pos_time"], format = "%H", tz = "UTC"))
 
         #Selecting the final column
           final <- nldas[, c("Year", "DOY", "Hour", "light")]
             colnames(final)[4] <- "SW"
 
-      return(final)
+        #If write_output == TRUE, save the driver to disk
+          if(write_output == TRUE){
+            saveRDS(final, paste0(save_dir, "/", stringr::str_sub(file_name, 1, -11), "_NLDAS_processed.rds"))
+          } else{
+            return(final)
+          } #End if else statement
 
     } #End NLDAS_site function
 
-  #Apply the funciton to process each site
-    processed <- lapply(downloaded, NLDAS_site)
-      names(processed) <- downloaded_names
+  #Apply the function to make all driver files
+    if(write_output == TRUE){
+      lapply(downloaded, FUN = NLDAS_site, write_output = write_output, save_dir = save_dir)
+    } else{
+      processed <- lapply(downloaded, NLDAS_site)
+        names(processed) <- downloaded_names
+      
+      return(processed)
+    } #End if else statement    
 
   #Notify the user with a list of sites that did not have data
     missing <- Site_IDs[!(Site_IDs %in% downloaded_names)]
@@ -64,5 +79,6 @@ NLDAS_proc <- function(read_dir, Site_IDs){
         paste(missing, sep = "", collapse = ", ")))
     } #End if statement
 
-  return(processed)
 } #End NLDAS_proc
+
+

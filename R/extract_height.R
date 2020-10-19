@@ -5,7 +5,10 @@
 #' @param Site The site ID
 #' @param Lat The site Latitude
 #' @param Lon The site Longitude
-#'
+#' @param site_crs The coordinate reference system of the points, preferably designated
+#' as an EPSG code. For example, the most common geographic system is WGS84 and its EPSG 
+#' code is 4326. 
+#' 
 #' @return Site ID, Latitude, Longitude, and tree height
 #' @export
 
@@ -16,9 +19,7 @@
   #height globally with spaceborne lidar, J. Geophys. Res., 116, G04021,
   #doi:10.1029/2011JG001708.
 #===============================================================================
-extract_height <- function(Site_ID, Lat, Lon){
-  library("raster")
-  
+extract_height <- function(Site_ID, Lat, Lon, site_crs){
   #Import the Simard et al. (2011) dataset 
     simard2011 <- raster::raster(paste0(.libPaths(), "/StreamLightUtils/data/simard2011.tif"))
   
@@ -27,18 +28,23 @@ extract_height <- function(Site_ID, Lat, Lon){
 
   #Defining the min and max values (by default these are not associated with the raster)
     map_ranges <- raster::setMinMax(simard2011)
-
-  #Getting Lat and Lon data for my sites and making spatial
-    site_location <- data.frame(Site_ID, Lat, Lon)
-    xy <- site_location[, c("Lon", "Lat")]
-
-    xy_spdf <- sp::SpatialPointsDataFrame(coords = xy, data = site_location,
-        proj4string = CRS("+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"))
-
+    
+  #Create a simple features object from the site location
+    site_location <- data.frame(Lat, Lon)
+    
+  #Check if the data is in WGS84, if not reproject to WGS84
+    if(site_crs == 4326){
+      xy_sf <- sf::st_as_sf(site_location, coords = c('Lon', 'Lat'), crs = site_crs)
+    } else{
+      xy_native <- sf::st_as_sf(site_location, coords = c('Lon', 'Lat'), crs = site_crs)
+      xy_sf <- sf::st_transform(xy_native, crs = 4326)
+    } #End if else statement    
+ 
   #Extracting the canopy height at our site
-    TH <- raster::extract(map_ranges, xy_spdf)
+    suppressWarnings(TH <- raster::extract(map_ranges, xy_sf))
 
-  bound <- setNames(data.frame(Site_ID, Lat, Lon, TH), c("Site_ID", "Lat", "Lon", "TH"))
+  #Bind together the final information
+    bound <- setNames(data.frame(Site_ID, Lat, Lon, TH), c("Site_ID", "Lat", "Lon", "TH"))
 
   return(bound)
 } #End extract_height function

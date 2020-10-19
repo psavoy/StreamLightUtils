@@ -8,7 +8,10 @@
 #' @param Site The site name, for example "FL_ICHE2700"
 #' @param Lat The site Latitude
 #' @param Lon The site Longitude
-#'
+#' @param site_crs The coordinate reference system of the points, preferably designated
+#' as an EPSG code. For example, the most common geographic system is WGS84 and its EPSG 
+#' code is 4326. 
+#' 
 #' @return Returns a standardized file of light data
 #' @export
 
@@ -16,7 +19,7 @@
 #Standardized StreamPULSE light validation
 #Created 11/27/2017
 #===============================================================================
-light_standardized <- function(read_dir, save_dir, Site, Lat, Lon){
+light_standardized <- function(read_dir, save_dir, Site, Lat, Lon, site_crs){
   #Reading in the observed data and dynamically generating character classes
     setwd(read_dir)
     obs <- read.csv(paste(Site, "_sensorData.csv", sep = ""), colClasses = c(rep("character", 3),
@@ -30,7 +33,7 @@ light_standardized <- function(read_dir, save_dir, Site, Lat, Lon){
       obs$UTC_time <- as.POSIXct(obs[, "DateTime_UTC"], format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
 
     #Getting the name of the local timezone
-      tz_name <- get_tz(Lat, Lon)
+      tz_name <- get_tz(Lat = Lat, Lon = Lon, site_crs = site_crs)
 
     #Adding a POSIX time column in local time
       obs$local_time <- as.POSIXct(format(obs[, "UTC_time"], format =

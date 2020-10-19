@@ -4,7 +4,7 @@
 \alias{light_standardized}
 \title{Generates a standardized set of light validation data for StreamPULSE sites}
 \usage{
-light_standardized(read_dir, save_dir, Site, Lat, Lon)
+light_standardized(read_dir, save_dir, Site, Lat, Lon, site_crs)
 }
 \arguments{
 \item{read_dir}{The read directory for downloaded files. For example, "C:/}
@@ -16,6 +16,10 @@ light_standardized(read_dir, save_dir, Site, Lat, Lon)
 \item{Lat}{The site Latitude}
 
 \item{Lon}{The site Longitude}
+
+\item{site_crs}{The coordinate reference system of the points, preferably designated
+as an EPSG code. For example, the most common geographic system is WGS84 and its EPSG 
+code is 4326.}
 }
 \value{
 Returns a standardized file of light data

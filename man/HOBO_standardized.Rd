@@ -4,7 +4,7 @@
 \alias{HOBO_standardized}
 \title{Generates a standardized set of light from HOBO loggers}
 \usage{
-HOBO_standardized(read_dir, filename, Lat, Lon, estimate)
+HOBO_standardized(read_dir, filename, Lat, Lon, site_crs, estimate)
 }
 \arguments{
 \item{read_dir}{The read directory for downloaded files. For example, "C:/}
@@ -12,6 +12,10 @@ HOBO_standardized(read_dir, filename, Lat, Lon, estimate)
 \item{Lat}{The site Latitude}
 
 \item{Lon}{The site Longitude}
+
+\item{site_crs}{The coordinate reference system of the points, preferably designated
+as an EPSG code. For example, the most common geographic system is WGS84 and its EPSG 
+code is 4326.}
 
 \item{estimate}{Binary ("yes", "no"). If yes, PPFD (umol m-2 s-1) is estimated
 from the lux (lumens m-2) data}

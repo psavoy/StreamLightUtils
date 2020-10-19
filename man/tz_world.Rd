@@ -4,7 +4,9 @@
 \name{tz_world}
 \alias{tz_world}
 \title{A shapefile of world timezones}
-\format{Shapefile}
+\format{
+Shapefile
+}
 \usage{
 data(tz_world)
 }

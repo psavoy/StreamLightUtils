@@ -4,16 +4,28 @@
 \alias{make_driver}
 \title{Makes light model driver files}
 \usage{
-make_driver(site_locs, NLDAS_processed, MOD_processed, save_dir)
+make_driver(
+  site_locs,
+  NLDAS_processed,
+  MOD_processed,
+  write_output = FALSE,
+  save_dir = NULL
+)
 }
 \arguments{
-\item{site_locs}{A table with Site_ID, Lat, and Lon}
+\item{site_locs}{A table with Site_ID, Lat, and Lon, and the coordinate
+reference system designated as an EPSG code. For example, the most common 
+geographic system is WGS84 and its EPSG code is 4326}
 
 \item{NLDAS_processed}{Output from the NLDAS_proc function}
 
 \item{MOD_processed}{Output from the}
 
-\item{save_dir}{The save directory for files to be placed in. For example, "C:/}
+\item{write_output}{Binary indicating whether to write each individual driver
+file to disk. Default value is FALSE.}
+
+\item{save_dir}{Optional parameter when write_output = TRUE. The save directory 
+for files to be placed in. For example, "C:/}
 }
 \value{
 Returns a driver time series

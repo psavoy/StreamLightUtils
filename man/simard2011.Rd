@@ -4,7 +4,9 @@
 \name{simard2011}
 \alias{simard2011}
 \title{LiDAR derived estimates of tree heights from Simard et al. (2011)}
-\format{GeoTIFF}
+\format{
+GeoTIFF
+}
 \usage{
 data(simard2011)
 }
