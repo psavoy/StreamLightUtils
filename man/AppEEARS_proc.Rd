@@ -4,13 +4,25 @@
 \alias{AppEEARS_proc}
 \title{Filters and gap-fills downloaded MODIS AppEEARS data}
 \usage{
-AppEEARS_proc(Site, fit_method, plot = FALSE)
+AppEEARS_proc(
+  unpacked_LAI,
+  fit_method,
+  plot = FALSE,
+  write_output = FALSE,
+  save_dir = NULL
+)
 }
 \arguments{
-\item{Site}{The site name}
+\item{unpacked_LAI}{Output from the AppEEARS_unpack_QC function}
 
 \item{fit_method}{There are several options available from the phenofit package including
 AG", "Beck", "Elmore", "Gu", "Klos", "Zhang". Additionally, "spline" is available #'}
+
+\item{write_output}{Binary indicating whether to write each individual driver
+file to disk. Default value is FALSE.}
+
+\item{save_dir}{Optional parameter when write_output = TRUE. The save directory 
+for files to be placed in. For example, "C:/}
 
 \item{Plot}{Binary, where plot = TRUE generates a plot and plot = FALSE does not}
 }
