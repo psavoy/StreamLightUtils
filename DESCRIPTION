@@ -1,12 +1,12 @@
 Package: StreamLightUtils
 Type: Package
-Title: What the Package Does (Title Case)
+Title: A Utility Package for the StreamLight Package
 Version: 0.1.0
+Date: 2020-12-29
 Author: Phil Savoy
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: This is a series of utilities designed to generate driver files
-    for use with the StreamLight package.
-License: What license is it under?
+Description: This is a series of utilities to help prepare parameter and driver files for the StreamLight package. The package provides tools to aid downloading and processing data as well as placing this data into a standardized set of model driver files to use with the StreamLight package.
+License: CC0
+URL: https://github.com/psavoy/StreamLightUtils
 Imports:
   data.table,
   raster,

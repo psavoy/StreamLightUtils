@@ -34,15 +34,18 @@
 AppEEARS_proc <- function(unpacked_LAI, fit_method, plot = FALSE, write_output = FALSE, save_dir = NULL){
   #Internal wrapper to cycle over sites
     site_proc <- function(Site, fit_method, plot, write_output, save_dir){
+      #Get the site of interest
+        SOI <- unpacked_LAI[[Site]]
+      
       #If fit_method == phenofit, smoothing using Whittaker smoother and fit using an
       #assymetric Gaussian function in the phenofit package
-        if(fit_method %in% c("AG", "Beck", "Elmore", "Gu", "Klos", "Zhang")){processed <- LAI_proc_phenofit(Site, fit_method = fit_method)}
+        if(fit_method %in% c("AG", "Beck", "Elmore", "Gu", "Klos", "Zhang")){processed <- LAI_proc_phenofit(SOI, fit_method = fit_method)}
       
       #If fit_method == spline, use the spline function
-        if(fit_method == "spline"){processed <- LAI_proc_spline(Site)}
+        if(fit_method == "spline"){processed <- LAI_proc_spline(SOI)}
     
       #If pro_type == dbl_log use the double logistic function
-        if(fit_method == "dbl_log"){processed <- LAI_proc_dbl(Site)}
+        if(fit_method == "dbl_log"){processed <- LAI_proc_dbl(SOI)}
     
       #Calculating some fitting statistics for the Savitzky-Golay filter
         proc_na_rm <- na.omit(processed)
@@ -80,7 +83,7 @@ AppEEARS_proc <- function(unpacked_LAI, fit_method, plot = FALSE, write_output =
   #Apply the function to 
     if(write_output == TRUE){
       lapply(
-        unpacked_LAI, 
+        names(unpacked_LAI), 
         FUN = site_proc, 
         fit_method = fit_method,
         plot = plot,
@@ -89,13 +92,15 @@ AppEEARS_proc <- function(unpacked_LAI, fit_method, plot = FALSE, write_output =
       )
     } else{
       LAI_final <- lapply(
-        unpacked_LAI, 
+        names(unpacked_LAI), 
         FUN = site_proc, 
         fit_method = fit_method,
         plot = plot,
         write_output = write_output,
         save_dir = save_dir
       )
+      
+      names(LAI_final) <- names(unpacked_LAI)
       
       return(LAI_final)
       
