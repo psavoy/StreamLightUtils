@@ -65,7 +65,7 @@ NLDAS_proc <- function(read_dir, Site_IDs, write_output = FALSE, save_dir = NULL
     if(write_output == TRUE){
       lapply(downloaded, FUN = NLDAS_site, write_output = write_output, save_dir = save_dir)
     } else{
-      processed <- lapply(downloaded, NLDAS_site)
+      processed <- lapply(downloaded, FUN = NLDAS_site, write_output = write_output, save_dir = save_dir)
         names(processed) <- downloaded_names
       
       return(processed)
@@ -80,5 +80,3 @@ NLDAS_proc <- function(read_dir, Site_IDs, write_output = FALSE, save_dir = NULL
     } #End if statement
 
 } #End NLDAS_proc
-
-
