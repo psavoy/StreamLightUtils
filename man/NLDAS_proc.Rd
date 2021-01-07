@@ -11,7 +11,7 @@ NLDAS_proc(read_dir, Site_IDs, write_output = FALSE, save_dir = NULL)
 
 \item{Site_IDs}{Site name(s), for example "NC_UEno"}
 
-\item{write_output}{Binary indicating whether to write each individual driver
+\item{write_output}{Logical value indicating whether to write each individual driver
 file to disk. Default value is FALSE.}
 
 \item{save_dir}{Optional parameter when write_output = TRUE. The save directory 

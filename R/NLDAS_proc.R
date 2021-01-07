@@ -4,7 +4,7 @@
 #'
 #' @param read_dir The read directory for downloaded files. For example, "C:/myfolder
 #' @param Site_IDs Site name(s), for example "NC_UEno"
-#' @param write_output Binary indicating whether to write each individual driver
+#' @param write_output Logical value indicating whether to write each individual driver
 #' file to disk. Default value is FALSE.
 #' @param save_dir Optional parameter when write_output = TRUE. The save directory 
 #' for files to be placed in. For example, "C:/

@@ -9,7 +9,7 @@ NLDAS_DL(save_dir, Site_ID, Lat, Lon, startDate)
 \arguments{
 \item{save_dir}{The save directory for files to be placed in. For example, "C:/myfolder}
 
-\item{Site_ID}{The site ID, for example "FL_ICHE2700"}
+\item{Site_ID}{The site ID, for example "NC_NHC"}
 
 \item{Lat}{The site Latitude}
 

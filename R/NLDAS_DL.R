@@ -3,7 +3,7 @@
 #' (w m-2) for a given Latitude and Longitude.
 #'
 #' @param save_dir The save directory for files to be placed in. For example, "C:/myfolder
-#' @param Site_ID The site ID, for example "FL_ICHE2700"
+#' @param Site_ID The site ID, for example "NC_NHC"
 #' @param Lat The site Latitude
 #' @param Lon The site Longitude
 #' @param startDate The starting date for the download (YYYY-MM-DD)
