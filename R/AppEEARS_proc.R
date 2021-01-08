@@ -17,7 +17,7 @@
 #'
 #' @param unpacked_LAI Output from the AppEEARS_unpack_QC function
 #' @param fit_method There are several options available from the phenofit package including
-#' AG", "Beck", "Elmore", "Gu", "Klos", "Zhang". Additionally, "spline" is available #'
+#' AG", "Beck", "Elmore", "Gu", "Klos", "Zhang". 
 #' @param Plot Binary, where plot = TRUE generates a plot and plot = FALSE does not
 #' @param write_output Binary indicating whether to write each individual driver
 #' file to disk. Default value is FALSE.
@@ -41,11 +41,11 @@ AppEEARS_proc <- function(unpacked_LAI, fit_method, plot = FALSE, write_output =
       #assymetric Gaussian function in the phenofit package
         if(fit_method %in% c("AG", "Beck", "Elmore", "Gu", "Klos", "Zhang")){processed <- LAI_proc_phenofit(SOI, fit_method = fit_method)}
       
-      #If fit_method == spline, use the spline function
-        if(fit_method == "spline"){processed <- LAI_proc_spline(SOI)}
-    
-      #If pro_type == dbl_log use the double logistic function
-        if(fit_method == "dbl_log"){processed <- LAI_proc_dbl(SOI)}
+      # #If fit_method == spline, use the spline function
+      #   if(fit_method == "spline"){processed <- LAI_proc_spline(SOI)}
+      # 
+      # #If pro_type == dbl_log use the double logistic function
+      #   if(fit_method == "dbl_log"){processed <- LAI_proc_dbl(SOI)}
     
       #Calculating some fitting statistics for the Savitzky-Golay filter
         proc_na_rm <- na.omit(processed)

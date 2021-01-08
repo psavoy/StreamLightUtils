@@ -16,7 +16,7 @@ AppEEARS_proc(
 \item{unpacked_LAI}{Output from the AppEEARS_unpack_QC function}
 
 \item{fit_method}{There are several options available from the phenofit package including
-AG", "Beck", "Elmore", "Gu", "Klos", "Zhang". Additionally, "spline" is available #'}
+AG", "Beck", "Elmore", "Gu", "Klos", "Zhang".}
 
 \item{write_output}{Binary indicating whether to write each individual driver
 file to disk. Default value is FALSE.}
