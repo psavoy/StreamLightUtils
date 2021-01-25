@@ -62,7 +62,7 @@ AppEEARS_proc <- function(unpacked_LAI, fit_method, plot = FALSE, write_output =
       
             plot(processed[, "Date"], processed[, "Lai"], pch = 20, col = "grey60",
               ylim = c(0, 7), xlab = "Time (Days)", ylab = ylabel, main = paste("Site= ",
-              unique(Site[, "ID"])," r2 = ", r2, " ;RMSE = ", RMSE, " ;MAE = ", MAE, sep = ""))
+              Site," r2 = ", r2, " ;RMSE = ", RMSE, " ;MAE = ", MAE, sep = ""))
       
           #Continuous daily LAI (from spline fit to SGF filtered data)
             lines(processed[, "Date"], processed[, "LAI_proc"], col = "black", lwd = 2)      
