@@ -1,8 +1,8 @@
 Package: StreamLightUtils
 Type: Package
 Title: A Utility Package for the StreamLight Package
-Version: 0.1.0
-Date: 2021-01-07
+Version: 0.1.1
+Date: 2021-01-26
 Author: Phil Savoy
 Description: This is a series of utilities to help prepare parameter and driver files for the StreamLight package. The package provides tools to aid downloading and processing data as well as placing this data into a standardized set of model driver files to use with the StreamLight package.
 License: CC0
@@ -12,7 +12,7 @@ Imports:
   raster,
   rgdal,
   signal,
-  sp,
+  sf,
   stringr,
   phenofit
 Depends:
@@ -20,9 +20,10 @@ Depends:
   raster,
   rgdal,
   signal,
-  sp,
+  sf,
   stringr,
-  phenofit
+  phenofit,
+  R (>= 4.0)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
