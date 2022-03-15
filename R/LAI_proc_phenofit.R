@@ -64,33 +64,39 @@ LAI_proc_phenofit <- function(Site, fit_method){
       
     #Divide the growing season
     #MAY WANT TO CHECK ON LAMBDA VALUE IN THE FUTURE
-      breaks <- phenofit::season_mov(lai_input, 
-        FUN = smooth_wWHIT, 
-        wFUN = wTSM,
-        maxExtendMonth = 6,
-        r_min = 0.1,
-        IsPlot = FALSE, 
-        IsPlot.OnlyBad = FALSE, 
-        print = FALSE,
-        iters = 2,
-        lambda = 1600
+      breaks <- phenofit::season_mov(
+        lai_input, 
+        options = list(
+          FUN = "smooth_wWHIT", 
+          wFUN = "wTSM",
+          maxExtendMonth = 12,
+          r_min = 0.1, 
+          IsPlot = FALSE, 
+          IsPlot.OnlyBad = FALSE, 
+          print = FALSE,
+          iters = 4,
+          lambda = 1600  
+        )
       )  
       
     #Curve fitting
-      lai_fit <- phenofit::curvefits(lai_input, 
+      lai_fit <- phenofit::curvefits(
+        lai_input, 
         brks = breaks,
-        methods = c(fit_method), 
-        wFUN = wTSM, 
-        nextend = 2, 
-        maxExtendMonth = 3, 
-        minExtendMonth = 1, 
-        minPercValid = 0.2, 
-        print = FALSE, 
-        verbose = FALSE, 
-        iters = 2, 
-        use.rough = FALSE,
-        use.y0 = TRUE
-      )     
+        options = list(
+          methods = c(fit_method), 
+          wFUN = wTSM, 
+          nextend = 2, 
+          maxExtendMonth = 3, 
+          minExtendMonth = 1, 
+          minPercValid = 0.2, 
+          print = FALSE, 
+          verbose = FALSE, 
+          iters = 2, 
+          use.rough = FALSE,
+          use.y0 = TRUE          
+        )
+      )    
       
     #Check the curve fitting parameters
       l_param <- get_param(lai_fit)

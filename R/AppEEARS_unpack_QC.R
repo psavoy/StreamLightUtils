@@ -98,7 +98,11 @@ AppEEARS_unpack_QC <- function(zip_file, zip_dir, request_sites){
       ID_merge <- merge(setNames(data.frame(names(split_na_rm)), "no_punct"), ID_DF,
         by = "no_punct")
 
-      names(split_na_rm) <- ID_merge[, "Site_ID"]
+    #Add row names to serve as an index
+      rownames(ID_merge) <- ID_merge[, "no_punct"]
+      
+    #Assign names
+      names(split_na_rm) <- ID_merge[names(split_na_rm), "Site_ID"]      
 
   #Notify the user with a list of sites that did not have data
     missing <- request_sites[!(request_sites %in% names(split_na_rm))]
