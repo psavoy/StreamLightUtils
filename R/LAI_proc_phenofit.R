@@ -42,6 +42,10 @@ LAI_proc_phenofit <- function(Site, fit_method){
     
   #Pad the timeseries with a year at the start and the end
     ts_padded <- pad_ts(ts = ts, t_res = t_res)
+    
+  #Set fill values as NA. Note, for right now this only catches the 255 fill value
+  #since that is the only one that has cropped up. Could adjust to 249-255 if needed. #PS 2022
+    ts_padded[ts_padded[, "Lai"] == 255, "Lai"] <- NA
   
   #-------------------------------------------------  
   #Perform the LAI smoothing & curve fitting
