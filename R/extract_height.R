@@ -21,8 +21,11 @@
 #===============================================================================
 extract_height <- function(Site_ID, Lat, Lon, site_crs){
   #Import the Simard et al. (2011) dataset 
-    simard2011 <- raster::raster(paste0(.libPaths(), "/StreamLightUtils/data/simard2011.tif"))
+    simard2011 <- raster::raster(system.file("data/simard2011.tif", package="StreamLightUtils"))
   
+  # #Import the Simard et al. (2011) dataset 
+  #   simard2011 <- raster::raster(paste0(.libPaths(), "/StreamLightUtils/data/simard2011.tif"))
+  # 
   # #Import the Simard et al. (2011) dataset if it is not already loaded
   #   if(!exists("simard2011")){data("simard2011", package = "StreamLightUtils")}
 

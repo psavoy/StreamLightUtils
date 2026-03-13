@@ -13,7 +13,7 @@
 #Function for unpacking the LAI data downloaded from AppEEARS
 #Created 6/25/2020
 #===============================================================================
-AppEEARS_unpack_QC <- function(zip_file, zip_dir, request_sites){
+appeears_unpack_qc <- function(zip_file, zip_dir, request_sites){
   #Get the name of the request based on the .zip file
     request <- sub('\\..*', '', zip_file)
 
@@ -114,6 +114,6 @@ AppEEARS_unpack_QC <- function(zip_file, zip_dir, request_sites){
 
   return(split_na_rm)
 
-} #End AppEEARS_unpack_QC function
+} #End appeears_unpack_qc function
 
 

@@ -4,8 +4,8 @@
 #' @param site_locs A table with Site_ID, Lat, and Lon, and the coordinate
 #' reference system designated as an EPSG code. For example, the most common 
 #' geographic system is WGS84 and its EPSG code is 4326
-#' @param NLDAS_processed Output from the NLDAS_proc function
-#' @param MOD_processed Output from the
+#' @param nldas_prepped Output from the nldas_prep function
+#' @param modis_prepped Output from the appeears_prep function
 #' @param write_output Binary indicating whether to write each individual driver
 #' file to disk. Default value is FALSE.
 #' @param save_dir Optional parameter when write_output = TRUE. The save directory 
@@ -17,15 +17,15 @@
 #Function for making model driver files
 #Created 11/30/2017
 #===============================================================================
-make_driver <- function(site_locs, NLDAS_processed, MOD_processed, write_output = FALSE, save_dir = NULL){
+make_driver <- function(site_locs, nldas_prepped, modis_prepped, write_output = FALSE, save_dir = NULL){
   #Find sites that have both NLDAS and MODIS data
-    site_intersect <- Reduce(intersect, list(names(NLDAS_processed), names(MOD_processed),
+    site_intersect <- Reduce(intersect, list(names(nldas_prepped), names(modis_prepped),
       site_locs[, "Site_ID"]))
 
   #Function for merging and making a driver file
     driver_merge <- function(Site, write_output, save_dir){
       #Merging all of the dataframes together where all data is present
-        merged <- merge(NLDAS_processed[[Site]], MOD_processed[[Site]], by = c("Year",
+        merged <- merge(nldas_prepped[[Site]], modis_prepped[[Site]], by = c("Year",
           "DOY"))
 
       #Placing the data in the correct order

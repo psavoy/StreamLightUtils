@@ -31,7 +31,7 @@
 #Created 8/13/2018
 #Updated 7/14/2020 to include phenofit
 #===============================================================================
-AppEEARS_proc <- function(unpacked_LAI, fit_method, plot = FALSE, write_output = FALSE, save_dir = NULL){
+appeears_prep <- function(unpacked_LAI, fit_method, plot = FALSE, write_output = FALSE, save_dir = NULL){
   #Internal wrapper to cycle over sites
     site_proc <- function(Site, fit_method, plot, write_output, save_dir){
       #Get the site of interest
@@ -39,7 +39,7 @@ AppEEARS_proc <- function(unpacked_LAI, fit_method, plot = FALSE, write_output =
       
       #If fit_method == phenofit, smoothing using Whittaker smoother and fit using an
       #assymetric Gaussian function in the phenofit package
-        if(fit_method %in% c("AG", "Beck", "Elmore", "Gu", "Klos", "Zhang")){processed <- LAI_proc_phenofit(SOI, fit_method = fit_method)}
+        if(fit_method %in% c("AG", "Beck", "Elmore", "Gu", "Klos", "Zhang")){processed <- lai_proc_phenofit(SOI, fit_method = fit_method)}
       
       # #If fit_method == spline, use the spline function
       #   if(fit_method == "spline"){processed <- LAI_proc_spline(SOI)}
@@ -106,4 +106,4 @@ AppEEARS_proc <- function(unpacked_LAI, fit_method, plot = FALSE, write_output =
       
     } #End if else statement
     
-} #End AppEEARS_proc function
+} #End appeears_prep function

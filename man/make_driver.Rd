@@ -6,8 +6,8 @@
 \usage{
 make_driver(
   site_locs,
-  NLDAS_processed,
-  MOD_processed,
+  nldas_prepped,
+  modis_prepped,
   write_output = FALSE,
   save_dir = NULL
 )
@@ -17,9 +17,9 @@ make_driver(
 reference system designated as an EPSG code. For example, the most common 
 geographic system is WGS84 and its EPSG code is 4326}
 
-\item{NLDAS_processed}{Output from the NLDAS_proc function}
+\item{nldas_prepped}{Output from the nldas_prep function}
 
-\item{MOD_processed}{Output from the}
+\item{modis_prepped}{Output from the appeears_prep function}
 
 \item{write_output}{Binary indicating whether to write each individual driver
 file to disk. Default value is FALSE.}

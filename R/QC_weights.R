@@ -15,7 +15,7 @@
 #Define my version of the weights function (adapted from phenofit)   
 #Created 7/10/2020
 #===============================================================================
-QC_weights <- function(SCF_QC, wmin = 0.2, wmid = 0.5, wmax = 1){
+qc_weights <- function(SCF_QC, wmin = 0.2, wmid = 0.5, wmax = 1){
   #Create a blank vector of weights
     weights <- rep(NA, length(SCF_QC)) #default zero
    
@@ -26,4 +26,4 @@ QC_weights <- function(SCF_QC, wmin = 0.2, wmid = 0.5, wmax = 1){
   
   return(weights)
     
-} #End QC_weights function
+} #End qc_weights function

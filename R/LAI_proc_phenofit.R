@@ -24,7 +24,7 @@
 #Function for LAI smoothing and curve fitting using the phenofit package
 #Created 7/13/2020
 #===============================================================================
-LAI_proc_phenofit <- function(Site, fit_method){
+lai_proc_phenofit <- function(Site, fit_method){
   #
     ts <- Site
     
@@ -32,7 +32,7 @@ LAI_proc_phenofit <- function(Site, fit_method){
     ts$date <- as.Date(ts[, "pos_time"])
       
   #Calculate weights from 5-level QC score
-    ts$w <- QC_weights(SCF_QC = ts[, "FparLai_QC_SCF_QC"], wmin = 0.2, wmid = 0.5, 
+    ts$w <- qc_weights(SCF_QC = ts[, "FparLai_QC_SCF_QC"], wmin = 0.2, wmid = 0.5, 
       wmax = 1)    
     
   #Calculate the temporal resolution of the dataset
@@ -51,7 +51,7 @@ LAI_proc_phenofit <- function(Site, fit_method){
   #Perform the LAI smoothing & curve fitting
   #-------------------------------------------------
     #Get # of scenes per year
-      scene_count <- 365 / t_res  
+      scene_count <- 365 / as.numeric(t_res)  
     
     #Check the input LAI data
     #ECOSYSTEM OF CODE NEEDS TO BE UPDATED SO THE SOUTH PARAMETER VARIES BASED ON SITE LOCATION
@@ -141,4 +141,4 @@ LAI_proc_phenofit <- function(Site, fit_method){
       
   return(final_merged)
  
-} #End LAI_proc_phenofit function
+} #End lai_proc_phenofit function
